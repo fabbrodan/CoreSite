@@ -1,0 +1,47 @@
+﻿@model Site.Models.AllFilesViewModel;
+@{
+    //ViewData["Title"] = "Home Page";
+    var publicImages = Model.Images.ToList<Images>();
+}
+<script src="~/js/site.js"></script>
+<div class="sidebar">
+    @foreach(FileCategories category in Model.Categories)
+    {
+        <p><a class="nav-link text-dark" asp-controller="Home" asp-action="IndexCategory" asp-route-categoryId="@category.CategoryId">@category.CategoryLabel</a></p>
+    }
+    <p><a class="nav-link text-dark" asp-controller="Home" asp-action="Index">All</a></p>
+</div>
+
+<div class="container-fluid">
+    <div class="container">
+        @for (int i = 0; i < publicImages.Count; i++)
+        {
+            if (i % 3 == 0)
+            {
+                @:<div class="row">
+            }
+
+                <div class="card col-4">
+                    <div class="card-body">
+                        <img class="card-img" src="~/Images/@Model.Categories.First(c => c.CategoryId == publicImages[i].CategoryId).CategoryLabel/@publicImages[i].ImgFileName" alt="@publicImages[i].ImgFileName" style="max-width:300px;height:auto;" />
+                    </div>
+                    <div class="card-footer">
+                        <p style="font-size:10px;" class="alignLeft">@Model.Categories.First(c => c.CategoryId == publicImages[i].CategoryId).CategoryLabel</p>
+                        @if (Context.Session.Keys.Contains<string>("Authenticated"))
+                        {
+                            <a style="font-size:10px;" class="alignRight" asp-controller="Home" asp-action="Download" asp-route-fileName="@Model.Categories.First(c => c.CategoryId == publicImages[i].CategoryId).CategoryLabel/@publicImages[i].ImgFileName">Download</a>
+                        }
+                    </div>
+                </div>
+
+            if (i % 3 == 2)
+            {
+                @:</div>
+            }
+        }
+        <div id="myModal" class="modal">
+            <span id="modalClose" class="close">&times;</span>
+            <img class="modal-content rounded" id="modalImg" src="" alt="">
+        </div>
+    </div>
+</div>

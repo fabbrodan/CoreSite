@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Site.Models.FileCategories>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <h1>Admin</h1>
+</div>
+
+<div class="container">
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#categoryDiv" role="button" aria-expanded="false" aria-controls="categoryDiv">Categories</a>
+    </p>
+    <div class="container collapse" id="categoryDiv">
+        @foreach (FileCategories category in Model)
+        {
+            if (category.CategoryId > 0)
+            {
+                <div class="row col-6">
+                    <p class="col-4">@category.CategoryLabel</p>
+                    <a class="col-2" asp-controller="Admin" asp-action="DeleteCategory" asp-route-id="@category.CategoryId">Delete</a>
+                    <a class="col-2" data-toggle="collapse" href="#editCategory" aria-expanded="false">Edit</a>
+                    <div class="collapse container pb-3" id="editCategory">
+                        <form asp-controller="Admin" asp-action="EditCategory" method="post" >
+                            <input type="text" name="newLabel" value="@category.CategoryLabel" />
+                            <input type="hidden" name="categoryId" value="@category.CategoryId" />
+                            <input type="submit" class="btn-link" value="Save" />
+                        </form>
+                    </div>
+                </div>
+            }
+            else if (category.CategoryId == 0)
+            {
+                <div class="row col-6">
+                    <p class="col-6">@category.CategoryLabel</p>
+                </div>
+            }
+        }
+        <div class="container">
+            <form asp-controller="Admin" asp-action="NewCategory" method="post">
+                <div class="form-group">
+                    <input type="text" name="categoryLabel" />
+                    <label for="categoryLabel">New Category</label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-secondary" value="Add" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

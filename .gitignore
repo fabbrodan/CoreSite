@@ -3,3 +3,8 @@
 ################################################################################
 
 /.vs/Site/v15
+/Site/bin/Release/netcoreapp2.2
+/Site/obj/Linux/netcoreapp2.2
+/Site/obj/publish/linux-x64
+/Site/obj/Release/netcoreapp2.2
+/Site/obj/netcoreapp2.2/linux-x64/host

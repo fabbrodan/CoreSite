@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "File Upload";
+}
+
+<div class="container">
+    <h1>File Upload</h1>
+</div>
+
+<div class="container">
+    <form method="post" asp-controller="Image" asp-action="Upload" enctype="multipart/form-data">
+        <div class="input-group">
+            <div class="custom-file">
+                <input type="file" multiple name="files" class="custom-file-input" id="uploadInput"/>
+                <label class="custom-file-label" for="uploadInput">Choose file(s)</label>
+            </div>
+        </div>
+        <div class="form-group pt-3">
+            <input type="submit" class="btn btn-primary" value="Upload"/>
+        </div>
+    </form>
+</div>
