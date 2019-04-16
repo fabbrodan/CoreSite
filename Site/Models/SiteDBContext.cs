@@ -20,6 +20,7 @@ namespace Site.Models
         public virtual DbSet<Files> Files { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<FileCategories> FileCategories { get; set; }
+        public virtual DbSet<Folders> Folders { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -68,6 +69,12 @@ namespace Site.Models
                 entity.Property(e => e.PublishedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.UploadedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<Folders>(entity =>
+            {
+                entity.HasKey(e => e.FolderId);
+                entity.Property(e => e.FolderName).IsRequired().HasMaxLength(50);
             });
 
             modelBuilder.Entity<Users>(entity =>

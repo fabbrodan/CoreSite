@@ -56,27 +56,33 @@ namespace Site.Controllers
 
         public async Task<IActionResult> DeleteCategory(int? Id)
         {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images");
             List<Images> imgList = await _context.Images.Where<Images>(i => i.CategoryId == Id).ToListAsync<Images>();
             FileCategories oldCategory = await _context.FileCategories.FirstAsync<FileCategories>(c => c.CategoryId == Id);
 
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images");
-
-            try
+            if (imgList.Count() > 0)
             {
-                foreach (Images img in imgList)
+                try
                 {
-                    string oldPath = Path.Combine(path, oldCategory.CategoryLabel, img.ImgFileName);
-                    var file = new FileInfo(oldPath);
-                    file.MoveTo(Path.Combine(path, "No Category", img.ImgFileName));
-                    img.CategoryId = 0;
+                    foreach (Images img in imgList)
+                    {
+                        string oldPath = Path.Combine(path, oldCategory.CategoryLabel, img.ImgFileName);
+                        var file = new FileInfo(oldPath);
+                        file.MoveTo(Path.Combine(path, "No Category", img.ImgFileName));
+                        img.CategoryId = 0;
+                    }
+                    Directory.Delete(Path.Combine(path, oldCategory.CategoryLabel));
+                    _context.FileCategories.Remove(oldCategory);
+                    await _context.SaveChangesAsync();
                 }
-                Directory.Delete(Path.Combine(path, oldCategory.CategoryLabel));
-                _context.FileCategories.Remove(oldCategory);
-                await _context.SaveChangesAsync();
+                catch (Exception)
+                {
+                    return View("../Shared/Error");
+                }
             }
-            catch (Exception)
+            else
             {
-                return View("../Shared/Error");
+                Directory.Delete(Path.Combine(path, oldCategory.CategoryLabel));
             }
 
             List<FileCategories> categoryList = await _context.FileCategories.ToListAsync<FileCategories>();

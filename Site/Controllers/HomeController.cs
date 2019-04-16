@@ -54,7 +54,7 @@ namespace Site.Controllers
         {
             AllFilesViewModel model = new AllFilesViewModel
             {
-                Images = await _context.Images.Where<Images>(i => i.CategoryId == categoryId).ToListAsync<Images>()
+                Images = await _context.Images.Where<Images>(i => i.CategoryId == categoryId && i.IsPublished == 1).ToListAsync<Images>()
             };
 
             List<int> distinctCategoryIds = new List<int>();

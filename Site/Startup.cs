@@ -44,7 +44,6 @@ namespace Site
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.Name = "MySessionCookie";
                 options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
             });
 
             services.AddDbContext<SiteDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));

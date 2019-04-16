@@ -17,11 +17,20 @@ $(".home-btn").click(function () {
     window.location.href = "/";
 });
 
-$("#uploadInput").on("change", function () {
-    if ($(this).length > 1) {
-        console.log("More than one");
+$(".delete-folder-btn").click(function () {
+    var doDelete = confirm("This will delete all files in the folder as well!");
+    if (doDelete) {
+
+        $.ajax({
+            url: "/File/DeleteFolder",
+            data: { "id": $(this).attr('data-folderid') },
+            type: "post"
+        });
+        console.log("Deleted");
     }
     else {
-        console.log("just one");
+        window.location.href = "/Image/LoadAllFiles";
+        console.log($(this).attr('data-folderid'));
+        console.log("Not deleted");
     }
 });

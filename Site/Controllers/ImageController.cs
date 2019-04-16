@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using System.Data.SqlTypes;
 using Site.Models;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Http;
 
 namespace Site.Controllers
 {
@@ -33,66 +34,39 @@ namespace Site.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Upload()
+        public IActionResult Upload(List<IFormFile> formFiles)
         {
-            int isPublish = Request.Form.Keys.Contains("isPublish") ? 1 : 0;
-
             foreach (var file in Request.Form.Files)
             {
                 var path = "";
                 int index = file.FileName.IndexOf('.') + 1;
                 string fileType = file.FileName.Substring(index).ToLower();
 
-                if (Enum.IsDefined(typeof(IMAGEMIMES), fileType))
+                int categoryId = Int32.Parse(Request.Form["categoryId"]);
+                FileCategories category = _context.FileCategories.First<FileCategories>(c => c.CategoryId == categoryId);
+                path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", category.CategoryLabel, file.FileName);
+
+                try
                 {
-                    int categoryId = Int32.Parse(Request.Form["categoryId"]);
-                    FileCategories category = await _context.FileCategories.FirstAsync<FileCategories>(c => c.CategoryId == categoryId);
-                    path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", category.CategoryLabel, file.FileName);
+                    Images img = new Images();
+                    img.ImgFileName = file.FileName;
+                    img.UploadedDate = DateTime.Now;
+                    img.IsPublished = 0;
+                    img.CategoryId = categoryId;
 
-                    try
+                    using (var stream = new FileStream(path, FileMode.Create))
                     {
-                        Images img = new Images();
-                        img.ImgFileName = file.FileName;
-                        img.UploadedDate = DateTime.Now;
-                        img.IsPublished = isPublish;
-                        img.CategoryId = categoryId;
-
-                        using (var stream = new FileStream(path, FileMode.Create))
-                        {
-                            await file.CopyToAsync(stream);
-                        }
-
-                        await _context.Images.AddAsync(img);
+                        file.CopyTo(stream);
                     }
-                    catch (IOException)
-                    {
-                        return View("../Shared/Error");
-                    }
+
+                    _context.Images.Add(img);
                 }
-                else
+                catch (IOException)
                 {
-                    path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files", file.FileName);
-
-                    try
-                    {
-                        Files miscFile = new Files();
-                        miscFile.FileName = file.FileName;
-                        miscFile.UploadedDate = DateTime.Now;
-
-                        using (var stream = new FileStream(path, FileMode.Create))
-                        {
-                            await file.CopyToAsync(stream);
-                        }
-
-                        await _context.Files.AddAsync(miscFile);
-                    }
-                    catch (IOException)
-                    {
-                        return View("../Shared/Error");
-                    }
+                    return View("../Shared/Error");
                 }
 
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
 
             return RedirectToAction("LoadAllFiles");
@@ -105,7 +79,8 @@ namespace Site.Controllers
             {
                 Images = await _context.Images.ToListAsync<Images>(),
                 Files = await _context.Files.ToListAsync<Files>(),
-                Categories = await _context.FileCategories.ToListAsync<FileCategories>()
+                Categories = await _context.FileCategories.ToListAsync<FileCategories>(),
+                FileFolders = await _context.Folders.ToListAsync<Folders>()
             };
 
             model.Categories = model.Categories.OrderBy<FileCategories, int>(i => i.CategoryId);
@@ -142,8 +117,8 @@ namespace Site.Controllers
             {
                 return NotFound();
             }
-
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", img.ImgFileName);
+            FileCategories category = await _context.FileCategories.FirstAsync(c => c.CategoryId == img.CategoryId);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", category.CategoryLabel, img.ImgFileName);
             var fileInfo = new FileInfo(path);
             try
             {

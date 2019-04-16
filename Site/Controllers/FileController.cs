@@ -77,17 +77,44 @@ namespace Site.Controllers
         }
 
         [HttpPost]
-        public IActionResult NewFolder()
+        public async Task<IActionResult> NewFolder()
         {
             var name = Request.Form["folderName"];
             var rootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files");
+            Folders newFolder = new Folders{ FolderName = name };
 
             if (!Directory.Exists(Path.Combine(rootPath, name)))
             {
-                Directory.CreateDirectory(Path.Combine(rootPath, name));
+                try
+                {
+                    Directory.CreateDirectory(Path.Combine(rootPath, name));
+                    _context.Folders.Add(newFolder);
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+                    return View("../Shared/Error");
+                }
             }
 
             return RedirectToAction("LoadAllFiles", "Image");
+        }
+
+        public async Task<IActionResult> DeleteFolder(int? id)
+        {
+            Folders folder = await _context.Folders.FirstAsync(f => f.FolderId == id);
+            try
+            {
+                _context.Folders.Remove(folder);
+                Directory.Delete(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files", folder.FolderName), true);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return View("../Shared/Error");
+            }
+
+            return RedirectToAction("LoadAllFIles", "Image");
         }
     }
 }

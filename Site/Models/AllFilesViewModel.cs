@@ -10,5 +10,6 @@ namespace Site.Models
         public IEnumerable<Images> Images { get; set; }
         public IEnumerable<Files> Files { get; set; }
         public IEnumerable<FileCategories> Categories { get; set; }
+        public IEnumerable<Folders> FileFolders { get; set; }
     }
 }

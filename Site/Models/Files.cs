@@ -10,6 +10,6 @@ namespace Site.Models
         public int FileId { get; set; }
         public string FileName { get; set; }
         public DateTime UploadedDate { get; set; }
-        public string FolderName { get; set; }
+        public int FolderId { get; set; }
     }
 }
