@@ -47,5 +47,47 @@ namespace Site.Controllers
 
             return RedirectToAction("LoadAllFiles", "Image");
         }
+
+        public async Task<IActionResult> Upload(string folder)
+        {
+            foreach (var file in Request.Form.Files)
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files", folder, file.FileName);
+
+                try
+                {
+                    Files miscFile = new Files();
+                    miscFile.FileName = file.FileName;
+                    miscFile.UploadedDate = DateTime.Now;
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    await _context.Files.AddAsync(miscFile);
+                }
+                catch (IOException)
+                {
+                    return View("../Shared/Error");
+                }
+            }
+
+            return RedirectToAction("LoadAllFiles", "Image");
+        }
+
+        [HttpPost]
+        public IActionResult NewFolder()
+        {
+            var name = Request.Form["folderName"];
+            var rootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files");
+
+            if (!Directory.Exists(Path.Combine(rootPath, name)))
+            {
+                Directory.CreateDirectory(Path.Combine(rootPath, name));
+            }
+
+            return RedirectToAction("LoadAllFiles", "Image");
+        }
     }
 }
