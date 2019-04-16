@@ -37,6 +37,7 @@ namespace Site
             });
 
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+            services.Configure<MailConfiguration>(Configuration.GetSection("MailConfiguration"));
 
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
