@@ -82,7 +82,9 @@ namespace Site.Controllers
             }
             else
             {
+                _context.FileCategories.Remove(oldCategory);
                 Directory.Delete(Path.Combine(path, oldCategory.CategoryLabel));
+                await _context.SaveChangesAsync();
             }
 
             List<FileCategories> categoryList = await _context.FileCategories.ToListAsync<FileCategories>();

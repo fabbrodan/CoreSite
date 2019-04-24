@@ -47,7 +47,7 @@
                 {
 
                     <div class="row pt-3">
-                        <div class="col-lg-6 col-md-4 col-sm-2">
+                        <div class="col-lg-8 col-md-5 col-sm-3">
                             <img src="~/Images/@category.CategoryLabel/@img.ImgFileName" alt="@img.ImgFileName" style="max-width:100%; height:auto" />
                             <p class="pt-1">Uploaded: @img.UploadedDate.ToString("yyyy'-'MM'-'dd")</p>
                             <a class="pr-2" asp-action="Delete" asp-controller="Image" asp-route-id="@img.ImageId">Delete</a>
@@ -89,6 +89,7 @@
                 </div>
             </form>
         </div>
+        <hr/>
         
         @foreach (Folders folder in Model.FileFolders)
         {
@@ -105,6 +106,22 @@
             </div>
 
             <div class="container collapse" id="@folder.FolderName">
+
+                <div class="col collapse" id="@folder.FolderName">
+                    <form asp-controller="File" asp-action="Upload" enctype="multipart/form-data" method="post">
+                        <div class="row">
+                            <div class="col">
+                                <input class="custom-file-input" type="file" multiple name="files" />
+                                <label class="custom-file-label" for="uploadInput">Choose file(s)</label>
+                            </div>
+                            <div class="col">
+                                <input type="submit" class="btn btn-primary" value="Upload" />
+                                <input type="hidden" name="folderId" value="@folder.FolderId" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
                 @if (Model.Files.Where(f => f.FolderId == folder.FolderId).Count() == 0)
                 {
                     <p>No files in this folder</p>

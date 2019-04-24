@@ -1,0 +1,12 @@
+USE [SiteDB]
+GO
+
+ALTER TABLE [dbo].[Files]
+DROP CONSTRAINT [FK1_Files];
+
+ALTER TABLE [dbo].[Files]
+ADD CONSTRAINT [FK1_Files]
+FOREIGN KEY([FolderId])
+REFERENCES [dbo].[Folders] ([FolderId])
+ON DELETE CASCADE
+GO

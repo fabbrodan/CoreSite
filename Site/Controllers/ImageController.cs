@@ -42,7 +42,7 @@ namespace Site.Controllers
                 int index = file.FileName.IndexOf('.') + 1;
                 string fileType = file.FileName.Substring(index).ToLower();
 
-                int categoryId = Int32.Parse(Request.Form["categoryId"]);
+                int categoryId = Int32.Parse(Request.Form["folderId"]);
                 FileCategories category = _context.FileCategories.First<FileCategories>(c => c.CategoryId == categoryId);
                 path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", category.CategoryLabel, file.FileName);
 
@@ -123,7 +123,10 @@ namespace Site.Controllers
             try
             {
                 _context.Images.Remove(img);
-                fileInfo.Delete();
+                if (fileInfo.Exists)
+                {
+                    fileInfo.Delete();
+                }
                 await _context.SaveChangesAsync();
             }
             catch (Exception)
@@ -147,6 +150,7 @@ namespace Site.Controllers
                 return NotFound();
             }
             img.IsPublished = 1;
+            img.PublishedDate = DateTime.Now;
             await _context.SaveChangesAsync();
 
             return RedirectToAction("LoadAllFiles");

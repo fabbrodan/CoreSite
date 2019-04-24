@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Site.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace Site.Controllers
 {
@@ -48,24 +49,29 @@ namespace Site.Controllers
             return RedirectToAction("LoadAllFiles", "Image");
         }
 
-        public async Task<IActionResult> Upload(string folder)
+        public async Task<IActionResult> Upload(List<IFormFile> formFiles)
         {
+            int folderId = Int32.Parse(Request.Form["folderId"]);
+            Folders folder = await _context.Folders.FirstAsync(f => f.FolderId == folderId);
+
             foreach (var file in Request.Form.Files)
             {
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files", folder, file.FileName);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files", folder.FolderName, file.FileName);
 
                 try
                 {
-                    Files miscFile = new Files();
-                    miscFile.FileName = file.FileName;
-                    miscFile.UploadedDate = DateTime.Now;
+                    Files newFile = new Files();
+                    newFile.FileName = file.FileName;
+                    newFile.FolderId = folderId;
+                    newFile.UploadedDate = DateTime.Now;
 
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await file.CopyToAsync(stream);
                     }
 
-                    await _context.Files.AddAsync(miscFile);
+                    await _context.Files.AddAsync(newFile);
+                    await _context.SaveChangesAsync();
                 }
                 catch (IOException)
                 {
