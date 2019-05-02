@@ -15,6 +15,13 @@ namespace Site.Models
         {
         }
 
+        public string ConnectionString { get; set; }
+
+        public SiteDBContext(string ConnectionString)
+        {
+            this.ConnectionString = ConnectionString;
+        }
+
         public virtual DbSet<Configuration> Configuration { get; set; }
         public virtual DbSet<Images> Images { get; set; }
         public virtual DbSet<Files> Files { get; set; }

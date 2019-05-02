@@ -47,7 +47,7 @@ namespace Site
                 options.Cookie.HttpOnly = true;
             });
 
-            services.AddDbContext<SiteDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
+            services.AddDbContext<SiteDBContext>(options => options.UseMySql(Configuration.GetConnectionString("Database")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

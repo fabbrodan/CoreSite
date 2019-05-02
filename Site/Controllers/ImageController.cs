@@ -42,7 +42,7 @@ namespace Site.Controllers
                 int index = file.FileName.IndexOf('.') + 1;
                 string fileType = file.FileName.Substring(index).ToLower();
 
-                int categoryId = Int32.Parse(Request.Form["folderId"]);
+                int categoryId = Int32.Parse(Request.Form["categoryId"]);
                 FileCategories category = _context.FileCategories.First<FileCategories>(c => c.CategoryId == categoryId);
                 path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", category.CategoryLabel, file.FileName);
 

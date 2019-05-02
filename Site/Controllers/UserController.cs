@@ -36,8 +36,8 @@ namespace Site.Controllers
             });
 
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("Post", user);
+            HttpContext.Session.Set("Authenticated", new byte[1] { 1 });
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
