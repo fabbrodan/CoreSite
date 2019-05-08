@@ -19,31 +19,38 @@ namespace Site.Controllers
             this._context = context;
         }
 
-        public async Task<IActionResult> Delete(int? Id)
+        public async Task<IActionResult> Delete()
         {
-            if (Id == null)
-            {
-                return NotFound();
-            }
 
-            var file = await _context.FindAsync<Files>(Id);
+            foreach (var key in Request.Form.Keys)
+            {
+                int Id = 0;
+                Int32.TryParse(key, out Id);
 
-            if (file == null)
-            {
-                return NotFound();
-            }
+                if (Id == 0)
+                {
+                    break;
+                }
 
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files", file.FileName);
-            FileInfo info = new FileInfo(path);
-            try
-            {
-                _context.Files.Remove(file);
-                info.Delete();
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-                return View("../Shared/Error");
+                var file = await _context.FindAsync<Files>(Id);
+
+                if (file == null)
+                {
+                    return NotFound();
+                }
+
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files", file.FileName);
+                FileInfo info = new FileInfo(path);
+                try
+                {
+                    _context.Files.Remove(file);
+                    info.Delete();
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+                    return View("../Shared/Error");
+                }
             }
 
             return RedirectToAction("LoadAllFiles", "Image");
@@ -108,7 +115,9 @@ namespace Site.Controllers
 
         public async Task<IActionResult> DeleteFolder(int? id)
         {
-            Folders folder = await _context.Folders.FirstAsync(f => f.FolderId == id);
+            
+            Folders folder = _context.Folders.First(f => f.FolderId == id);
+
             try
             {
                 _context.Folders.Remove(folder);

@@ -96,18 +96,18 @@
         <div>
             <div class="row container pb-3">
                 <div class="col">
-                    <a class="btn btn-secondary" data-toggle="collapse" href="#@folder.FolderName" role="button" aria-expanded="false" aria-controls="@folder.FolderName">
+                    <a class="btn btn-secondary" data-toggle="collapse" href="#@folder.FolderName.Replace(" ", "")" role="button" aria-expanded="false" aria-controls="@folder.FolderName.Replace(" ", "")">
                         @folder.FolderName (@Model.Files.Where(f => f.FolderId == folder.FolderId).Count())
                     </a>
                 </div>
                 <div class="col">
-                    <a class="btn btn-danger delete-folder-btn" data-folderid="@folder.FolderId">Delete Folder</a>
+                    <a asp-controller="File" asp-action="DeleteFolder" class="btn btn-danger delete-folder-btn" data-folderid="@folder.FolderId">Delete Folder</a>
                 </div>
             </div>
 
-            <div class="container collapse" id="@folder.FolderName">
+            <div class="container collapse" id="@folder.FolderName.Replace(" ", "")">
 
-                <div class="col collapse" id="@folder.FolderName">
+                <div class="col collapse" id="@folder.FolderName.Replace(" ", "")">
                     <form asp-controller="File" asp-action="Upload" enctype="multipart/form-data" method="post">
                         <div class="row">
                             <div class="col">
@@ -124,11 +124,24 @@
 
                 @if (Model.Files.Where(f => f.FolderId == folder.FolderId).Count() == 0)
                 {
-                    <p>No files in this folder</p>
+                    <p class="pt-2">No files in this folder</p>
                 }
-                @foreach (Files file in Model.Files.Where(f => f.FolderId == folder.FolderId))
+                else
                 {
-                    <a class="text-dark" href="~/Files/@folder.FolderName/@file.FileName">@file.FileName</a>
+                    <div class="container">
+                        <form asp-controller="File" asp-action="Delete" enctype="multipart/form-data" method="post">
+                            @foreach (Files file in Model.Files.Where(f => f.FolderId == folder.FolderId))
+                            {
+                                <div class="pt-3 form-group">
+                                    <input type="checkbox" id="@file.FileId" name="@file.FileId" style="margin-right:5px;" />
+                                    <label for="@file.FileId"><a class="text-dark" href="~/Files/@folder.FolderName/@file.FileName">@file.FileName</a></label>
+                                </div>
+                            }
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-warning" value="Delete" />
+                            </div>
+                        </form>
+                    </div>
                 }
             </div>
             <hr/>

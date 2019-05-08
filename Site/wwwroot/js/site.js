@@ -18,13 +18,18 @@ $(".home-btn").click(function () {
 });
 
 $(".delete-folder-btn").click(function () {
+    console.log("Delete called");
     var doDelete = confirm("This will delete all files in the folder as well!");
     if (doDelete) {
+        $(".delete-folder-btn").attr("disabled", "disabled");
 
         $.ajax({
             url: "/File/DeleteFolder",
             data: { "id": $(this).attr('data-folderid') },
-            type: "post"
+            type: "post",
+            complete: function () {
+                $(".delete-folder-btn").removeAttr("disabled");
+            }
         });
         console.log("Deleted");
     }

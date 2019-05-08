@@ -118,7 +118,7 @@ namespace Site.Controllers
                 return NotFound();
             }
             FileCategories category = await _context.FileCategories.FirstAsync(c => c.CategoryId == img.CategoryId);
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", category.CategoryLabel, img.ImgFileName);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", category.CategoryLabel, img.ImgFileName);
             var fileInfo = new FileInfo(path);
             try
             {
