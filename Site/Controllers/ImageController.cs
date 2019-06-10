@@ -24,18 +24,37 @@ namespace Site.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
             {
                 return View("Unauthorized");
             }
-            return View();
+
+            AllFilesViewModel model = new AllFilesViewModel
+            {
+                Images = await _context.Images.ToListAsync<Images>(),
+                Files = await _context.Files.ToListAsync<Files>(),
+                Categories = await _context.FileCategories.ToListAsync<FileCategories>(),
+                FileFolders = await _context.Folders.ToListAsync<Folders>()
+            };
+
+            model.Categories = model.Categories.OrderBy<FileCategories, int>(i => i.CategoryId);
+            model.Images = model.Images.OrderByDescending<Images, DateTime>(t => t.UploadedDate);
+            model.Files = model.Files.OrderByDescending<Files, DateTime>(t => t.UploadedDate);
+
+            return View(model);
+            
         }
 
         [HttpPost]
         public IActionResult Upload(List<IFormFile> formFiles)
         {
+            if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
+            {
+                return View("Unauthorized");
+            }
+
             foreach (var file in Request.Form.Files)
             {
                 var path = "";
@@ -69,12 +88,18 @@ namespace Site.Controllers
                 _context.SaveChanges();
             }
 
-            return RedirectToAction("LoadAllFiles");
+            return RedirectToAction("Index");
         }
 
+        /*
         [HttpGet]
         public async Task<IActionResult> LoadAllFiles()
         {
+            if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
+            {
+                return View("Unauthorized");
+            }
+
             AllFilesViewModel model = new AllFilesViewModel
             {
                 Images = await _context.Images.ToListAsync<Images>(),
@@ -88,26 +113,15 @@ namespace Site.Controllers
             model.Files = model.Files.OrderByDescending<Files, DateTime>(t => t.UploadedDate);
 
             return View("AllFiles", model);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var img = await _context.FindAsync<Images>(id);
-            if (img == null)
-            {
-                return NotFound();
-            }
-
-            return View("Image", img);
-        }
+        } */
 
         public async Task<IActionResult> Delete(int? Id)
         {
+            if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
+            {
+                return View("Unauthorized");
+            }
+
             if (Id == null)
             {
                 return NotFound();
@@ -134,11 +148,16 @@ namespace Site.Controllers
                 return View("../Shared/Error");
             }
 
-            return RedirectToAction("LoadAllFiles");
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Publish(int? Id)
         {
+            if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
+            {
+                return View("Unauthorized");
+            }
+
             if (Id == null)
             {
                 return NotFound();
@@ -153,11 +172,16 @@ namespace Site.Controllers
             img.PublishedDate = DateTime.Now;
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("LoadAllFiles");
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Unpublish(int? Id)
         {
+            if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
+            {
+                return View("Unauthorized");
+            }
+
             if (Id == null)
             {
                 return NotFound();
@@ -171,11 +195,16 @@ namespace Site.Controllers
             img.IsPublished = 0;
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("LoadAllFiles");
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> CategoryUpdate(int? ImgId, int? CatId)
         {
+            if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
+            {
+                return View("Unauthorized");
+            }
+
             if (ImgId == null || CatId == null)
             {
                 return NotFound();
@@ -212,7 +241,7 @@ namespace Site.Controllers
                 return View("../Shared/Error", img);
             }
 
-            return RedirectToAction("LoadAllFiles");
+            return RedirectToAction("Index");
         }
     }
 

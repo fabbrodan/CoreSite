@@ -10,3 +10,9 @@
 /Site/obj/netcoreapp2.2/linux-x64/host
 /Site/wwwroot/Images
 /Site/wwwroot/Files
+/Site/appsettings.json
+/Site/appsettings.Development.json
+/favicon.ico
+/favicon.png
+/favicon.psd
+/git-user-psw

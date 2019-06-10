@@ -27,10 +27,6 @@
                     <div class="card-footer">
                         <p style="font-size:10px;" class="alignLeft">@Model.Categories.First(c => c.CategoryId == publicImages[i].CategoryId).CategoryLabel</p>
                         <p style="font-size:10px;" class="alignRight">@publicImages[i].PublishedDate.Value.Date.ToLongDateString()</p>
-                        @if (Context.Session.Keys.Contains<string>("Authenticated"))
-                        {
-                            <a style="font-size:10px;" class="alignRight" asp-controller="Home" asp-action="Download" asp-route-fileName="@Model.Categories.First(c => c.CategoryId == publicImages[i].CategoryId).CategoryLabel/@publicImages[i].ImgFileName">Download</a>
-                        }
                     </div>
                 </div>
 

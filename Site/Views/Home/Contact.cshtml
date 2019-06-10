@@ -1,10 +1,21 @@
-﻿<div class="container">
+﻿@model Site.Models.ContactText;
+
+<div class="container">
     <h1>Contact</h1>
     <div class="container text-center">
-        <p>This is where i will describe myself and blablablabla</p>
+        <p>@Model.Text</p>
         <form asp-controller="Mail" asp-action="Send" method="post">
-            <textarea class="form-control" cols="25" rows="15" name="body"></textarea>
-            <input class="btn btn-primary" type="submit" value="Send!" />
+            <div class="form-group">
+                <div class="form-row pb-2">
+                    <input type="text" class="form-control col-6 offset-3" name="subject" placeholder="Subject" />
+                </div>
+                <div class="form-row pb-2">
+                    <textarea class="form-control pb-3" cols="25" rows="15" name="body" placeholder="Your message"></textarea>
+                </div>
+                <div class="form-row">
+                    <input class="btn btn-primary" type="submit" value="Send!" />
+                </div>
+            </div>
         </form>
     </div>
 </div>

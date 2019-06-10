@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]Ester Ganestam</title>
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141409995-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-141409995-1');
+    </script>
+
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -42,7 +52,7 @@
                             </li>
                             -->
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="LoadAllFiles">My Files</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="Index">My Files</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
@@ -71,7 +81,7 @@
         </nav>
     </header>
         <div class="container-fluid">
-            <partial name="_CookieConsentPartial" />
+            <!--<partial name="_CookieConsentPartial" />-->
             <main role="main" class="pb-3">
                 @RenderBody()
             </main>

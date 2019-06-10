@@ -53,7 +53,7 @@ namespace Site.Controllers
                 }
             }
 
-            return RedirectToAction("LoadAllFiles", "Image");
+            return RedirectToAction("Index", "Image");
         }
 
         public async Task<IActionResult> Upload(List<IFormFile> formFiles)
@@ -86,7 +86,7 @@ namespace Site.Controllers
                 }
             }
 
-            return RedirectToAction("LoadAllFiles", "Image");
+            return RedirectToAction("Index", "Image");
         }
 
         [HttpPost]
@@ -110,7 +110,7 @@ namespace Site.Controllers
                 }
             }
 
-            return RedirectToAction("LoadAllFiles", "Image");
+            return RedirectToAction("Index", "Image");
         }
 
         public async Task<IActionResult> DeleteFolder(int? id)
@@ -129,7 +129,7 @@ namespace Site.Controllers
                 return View("../Shared/Error");
             }
 
-            return RedirectToAction("LoadAllFIles", "Image");
+            return RedirectToAction("Index", "Image");
         }
     }
 }

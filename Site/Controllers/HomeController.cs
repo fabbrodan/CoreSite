@@ -104,9 +104,10 @@ namespace Site.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public async Task<IActionResult> Contact()
         {
-            return View();
+            ContactText contactText = await _context.ContactText.FirstAsync(i => i.ID == 1);
+            return View(contactText);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

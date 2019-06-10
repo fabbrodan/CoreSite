@@ -28,6 +28,7 @@ namespace Site.Models
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<FileCategories> FileCategories { get; set; }
         public virtual DbSet<Folders> Folders { get; set; }
+        public virtual DbSet<ContactText> ContactText { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -103,6 +104,11 @@ namespace Site.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.UserRootPath).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<ContactText>(entity =>
+            {
+                entity.HasKey(e => e.ID);
             });
         }
     }
