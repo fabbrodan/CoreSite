@@ -128,7 +128,48 @@ body {
     border:none;
 }
 
+.head-title {
+    color:black;
+}
+.head-title:hover {
+    text-decoration:none;
+    color:black;
+}
+
+.card-img:hover {
+    cursor:pointer;
+}
+
 @keyframes zoom {
     from {transform:scale(0)}
     to {transform:scale(1)}
+}
+
+#category-navbar-btn {
+    float:left;
+}
+
+.nav-label {
+    font-weight: bold;
+}
+
+@media screen and (min-width: 0px) and (max-width: 576 px) {
+    #category-navbar {
+        display: block;
+    }
+    .nav-label {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 577px) and (max-width: 100%) {
+    #category-navbar {
+        display: none;
+    }
+    .nav-label {
+        display: none;
+    }
+    #category-navbar-content {
+        display: block;
+    }
 }

@@ -3,38 +3,42 @@
     var publicImages = Model.Images.ToList<Images>();
 }
 <script src="~/js/site.js"></script>
-<div class="sidebar">
-    @foreach(FileCategories category in Model.Categories)
-    {
-        <p><a class="nav-link text-dark" asp-controller="Home" asp-action="IndexCategory" asp-route-categoryId="@category.CategoryId">@category.CategoryLabel</a></p>
-    }
-    <p><a class="nav-link text-dark" asp-controller="Home" asp-action="Index">All</a></p>
-</div>
+<nav id="category-navbar" class="navbar navbar-left navbar-expand-sm navbar-toggleable-sm navbar-light">
+    <button id="category-navbar-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#category-navbar-content" aria-expanded="false" aria-label="Toggle Categories">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="category-navbar-content" class="navbar-collapse collapse flex-sm-row-reverse">
+        <ul class="navbar-nav flex-grow-1">
+            @foreach (FileCategories category in Model.Categories)
+            {
+                <li class="nav-item">
+                    <p><a class="nav-link text-dark" asp-controller="Home" asp-action="IndexCategory" asp-route-categoryId="@category.CategoryId">@category.CategoryLabel</a></p>
+                </li>
+            }
+            <li class="nav-item text-dark">
+                <p><a class="nav-link text-dark" asp-controller="Home" asp-action="Index">All</a></p>
+            </li>
+        </ul>
+    </div>
+    <p class="alignRight nav-label">Categories</p>
+</nav>
 
 <div class="container-fluid">
     <div class="container">
-        @for (int i = 0; i < publicImages.Count; i++)
-        {   
-            if (i % 3 == 0)
+        <div class="row">
+            @foreach(Images img in publicImages)
             {
-                @:<div class="row">
-                }
-
-                <div class="card col-4 draggable-card">
-                    <div class="card-body" >
-                        <img class="card-img" src="~/Images/@Model.Categories.First(c => c.CategoryId == publicImages[i].CategoryId).CategoryLabel/@publicImages[i].ImgFileName" alt="@publicImages[i].ImgFileName" style="max-width:300px;height:auto;" />
+                <div class="card col-12 col-sm-6 col-lg-4 col-xl-4">
+                    <div class="card-body">
+                        <img class="card-img" src="~/Images/@Model.Categories.First(c => c.CategoryId == img.CategoryId).CategoryLabel/@img.ImgFileName" alt="@img.ImgFileName" />
                     </div>
                     <div class="card-footer">
-                        <p style="font-size:10px;" class="alignLeft">@Model.Categories.First(c => c.CategoryId == publicImages[i].CategoryId).CategoryLabel</p>
-                        <p style="font-size:10px;" class="alignRight">@publicImages[i].PublishedDate.Value.Date.ToLongDateString()</p>
+                        <p style="font-size:10px;" class="alignLeft">@Model.Categories.First(c => c.CategoryId == img.CategoryId).CategoryLabel</p>
+                        <p style="font-size:10px;" class="alignRight">@img.PublishedDate.Value.ToLongDateString()</p>
                     </div>
                 </div>
-
-                if (i % 3 == 2)
-                {
-                @:</div>
             }
-        }
+        </div>
         <div id="myModal" class="modal">
             <span id="modalClose" class="close">&times;</span>
             <img class="modal-content rounded" id="modalImg" src="" alt="">
