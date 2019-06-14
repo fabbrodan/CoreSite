@@ -23,8 +23,11 @@ namespace Site.Controllers
         {
             AllFilesViewModel model = new AllFilesViewModel
             {
-                Images = await _context.Images.Where(p => p.IsPublished == 1).ToListAsync<Images>(),
+                Images = await _context.Images.Where(p => p.IsPublished == 1).ToListAsync<Images>()
             };
+            var SortedImages = model.Images.OrderByDescending(x => x.PublishedDate).ToList();
+
+            model.Images = SortedImages;
 
             List<int> distinctCategoryIds = new List<int>();
 
@@ -48,6 +51,14 @@ namespace Site.Controllers
             return View(model);
         }
 
+        [Route("sitemap.xml")]
+        public IActionResult Sitemap()
+        {
+            SitemapNode nodeClass = new SitemapNode();
+            string nodeMap = nodeClass.GetSitemapDocument(nodeClass.GetSitemapNodes());
+            return Content(nodeMap);
+        }
+
         [HttpGet]
         [ActionName("IndexCategory")]
         public async Task<IActionResult> Index (int? categoryId)
@@ -56,6 +67,10 @@ namespace Site.Controllers
             {
                 Images = await _context.Images.Where<Images>(i => i.CategoryId == categoryId && i.IsPublished == 1).ToListAsync<Images>()
             };
+
+            var SortedImages = model.Images.OrderByDescending(x => x.PublishedDate).ToList();
+
+            model.Images = SortedImages;
 
             List<int> distinctCategoryIds = new List<int>();
 
@@ -74,7 +89,9 @@ namespace Site.Controllers
                 categories.Add(await _context.FileCategories.FirstAsync<FileCategories>(i => i.CategoryId == id));
             }
 
-            model.Categories = categories;
+            var SortedCategories = categories.OrderByDescending(i => i.CategoryLabel).ToList();
+
+            model.Categories = SortedCategories;
 
             return View("Index", model);
         }

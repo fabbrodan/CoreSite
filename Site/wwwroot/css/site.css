@@ -37,8 +37,8 @@ button.accept-policy {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
@@ -124,8 +124,14 @@ body {
     transition:0.3s;
 }
 
+#modalCaption {
+    color:white;
+    position:center;
+    font-size:24px;
+}
+
 .card {
-    border:none;
+    border: none;
 }
 
 .head-title {
@@ -150,6 +156,10 @@ body {
 }
 
 .nav-label {
+    font-weight: bold;
+}
+
+.category-link:hover {
     font-weight: bold;
 }
 

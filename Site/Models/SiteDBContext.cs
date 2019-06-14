@@ -77,6 +77,8 @@ namespace Site.Models
                 entity.Property(e => e.PublishedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.UploadedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Description).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Folders>(entity =>

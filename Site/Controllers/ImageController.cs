@@ -243,6 +243,19 @@ namespace Site.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> UpdateDescription()
+         {
+            int imgId = Int32.Parse(Request.Form["imgId"]);
+            string description = Request.Form["description_"+ imgId.ToString()];
+
+            Images img = await _context.Images.FirstAsync<Images>(i => i.ImageId == imgId);
+            img.Description = description;
+            _context.Images.Update(img);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 
     public enum IMAGEMIMES

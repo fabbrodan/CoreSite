@@ -30,8 +30,6 @@ C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreap
 C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Site.csprojAssemblyReference.cache
 C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\Index.g.cshtml.cs
 C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\Unauthorized.g.cshtml.cs
-C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\AllFiles.g.cshtml.cs
-C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\Image.g.cshtml.cs
 C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Index.g.cshtml.cs
 C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Home\Contact.g.cshtml.cs
 C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Mail\Index.g.cshtml.cs
@@ -72,3 +70,5 @@ E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Site.csproj.CopyComplete
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\_Index.g.cshtml.cs
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Mail\InvalidMessage.g.cshtml.cs
+C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\_Index.g.cshtml.cs
+C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Mail\InvalidMessage.g.cshtml.cs
