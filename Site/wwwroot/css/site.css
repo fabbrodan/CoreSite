@@ -126,7 +126,7 @@ body {
 
 #modalCaption {
     color:white;
-    position:center;
+    text-align: center;
     font-size:24px;
 }
 

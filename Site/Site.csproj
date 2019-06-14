@@ -3,6 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <PackageId>EsterSite</PackageId>
+    <Authors>Daniel Åslund</Authors>
+    <Product>EsterSite</Product>
+		<ExcludeFoldersFromDeployment>
+			wwwroot\Files\;wwwroot\Images\
+		</ExcludeFoldersFromDeployment>
   </PropertyGroup>
 
 
@@ -17,7 +23,9 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\Files\" />
+    <Content Remove="wwwroot\Files\**" />
+	<Content Remove="wwwroot\Images\**" />
+	<Content Remove="appsettings.Development.json" />
   </ItemGroup>
 
 </Project>
