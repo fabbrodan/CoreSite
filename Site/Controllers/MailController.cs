@@ -32,7 +32,8 @@ namespace Site.Controllers
             "cock",
             "sucker",
             "kuk",
-            "sugare"
+            "sugare",
+            "fitta"
         };
         public MailController(IOptions<MailConfiguration> mailConfig)
         {
