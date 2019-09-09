@@ -3,6 +3,7 @@
 ################################################################################
 
 /.vs/Site/v15
+/.vs/Site/v16
 /Site/bin/Release/netcoreapp2.2
 /Site/obj/Linux/netcoreapp2.2
 /Site/obj/publish/linux-x64
