@@ -19,7 +19,7 @@ namespace Site.Controllers
             this._context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Start()
         {
             AllFilesViewModel model = new AllFilesViewModel
             {
@@ -47,6 +47,13 @@ namespace Site.Controllers
             }
 
             model.Categories = categories;
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            List<Images> model = await _context.Images.Where(s => s.StartImage == 1).ToListAsync();
 
             return View(model);
         }

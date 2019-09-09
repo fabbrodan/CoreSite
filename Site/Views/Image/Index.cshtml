@@ -59,6 +59,14 @@
                             {
                                 <a class="pr-2" asp-action="Publish" asp-controller="Image" asp-route-id="@img.ImageId">Publish</a>
                             }
+                            @if (img.StartImage == 1)
+                            {
+                                <a class="pr-2" asp-action="UnsetAsStartImage" asp-controller="Image" asp-route-id="@img.ImageId">Remove from start</a>
+                            }
+                            else
+                            {
+                                <a class="pr-2" asp-action="SetImageAsStart" asp-controller="Image" asp-route-id="@img.ImageId">Set as start image</a>
+                            }
                             <button class="btn btn-secondary btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 @Model.Categories.First(c => c.CategoryId == img.CategoryId).CategoryLabel
                             </button>
