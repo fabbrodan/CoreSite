@@ -11,5 +11,7 @@ namespace Site.Models
         public DateTime? PublishedDate { get; set; }
         public int IsPublished { get; set; }
         public int CategoryId { get; set; }
+        public string Description { get; set; }
+        public int StartImage { get; set; }
     }
 }

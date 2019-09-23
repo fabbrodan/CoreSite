@@ -32,7 +32,7 @@ namespace Site
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
@@ -44,7 +44,7 @@ namespace Site
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.Name = "MySessionCookie";
-                options.Cookie.HttpOnly = true;
+                options.Cookie.HttpOnly = false;
             });
 
             services.AddDbContext<SiteDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));

@@ -3,6 +3,7 @@
 ################################################################################
 
 /.vs/Site/v15
+/.vs/Site/v16
 /Site/bin/Release/netcoreapp2.2
 /Site/obj/Linux/netcoreapp2.2
 /Site/obj/publish/linux-x64
@@ -10,3 +11,9 @@
 /Site/obj/netcoreapp2.2/linux-x64/host
 /Site/wwwroot/Images
 /Site/wwwroot/Files
+/Site/appsettings.json
+/Site/appsettings.Development.json
+/favicon.ico
+/favicon.png
+/favicon.psd
+/git-user-psw

@@ -1,10 +1,111 @@
-﻿<div class="container">
+﻿@model Site.Models.ContactText;
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script type="text/javascript">
+
+    function verifyInput() {
+
+        var subject = $("#contactSubjectField");
+        var body = $("#contactBodyField");
+        var email = $("#contactEmailField");
+        var recaptcha = $("#g-recaptcha-response");
+
+        if (subject.val() === "" || body.val() === "" || email.val() === "" || recaptcha.val() === "") {
+
+            if (subject.val() === "") {
+                subject.addClass("alert-danger");
+            }
+            else {
+                if (subject.hasClass("alert-danger")) {
+                    subject.removeClass("alert-danger");
+                }
+            }
+            if (body.val() === "") {
+                body.addClass("alert-danger");
+            } else {
+                if (body.hasClass("alert-danger")) {
+                    body.removeClass("alert-danger");
+                }
+            }
+            if (email.val() === "") {
+                email.addClass("alert-danger");
+            } else {
+                if (email.hasClass("alert-danger")) {
+                    email.removeClass("alert-danger");
+                }
+            }
+            if (recaptcha.val() === "") {
+                alert("Please verify that you are not a robot!");
+            }
+        } else if (subject.val() != "" && body.val() != "" && email.val() != "") {
+            console.log("everything was ok");
+            $("#mailForm").submit();
+        }
+    }
+
+    function blurSubject() {
+        console.log("blur fired on subject field");
+        var subject = $("#contactSubjectField");
+        if (subject.val() === "") {
+            subject.addClass('alert-danger');
+        }
+        else {
+            if (subject.hasClass('alert-danger')) {
+                subject.removeClass('alert-danger');
+            }
+        }
+    }
+
+    function blurBody() {
+        
+        var body = $("#contactBodyField");
+        if (body.val() === "") {
+            body.addClass('alert-danger');
+        }
+        else {
+            if (body.hasClass('alert-danger')) {
+                body.removeClass('alert-danger');
+            }
+        }
+    }
+
+    function blurEmail() {
+        
+        var email = $("#contactEmailField");
+        if (email.val() === "") {
+            email.addClass('alert-danger');
+        }
+        else {
+            if (email.hasClass('alert-danger')) {
+                email.removeClass('alert-danger');
+            }
+        }
+    }
+
+</script>
+
+<div class="container">
     <h1>Contact</h1>
-    <div class="container text-center">
-        <p>This is where i will describe myself and blablablabla</p>
-        <form asp-controller="Mail" asp-action="Send" method="post">
-            <textarea class="form-control" cols="25" rows="15" name="body"></textarea>
-            <input class="btn btn-primary" type="submit" value="Send!" />
+    <div class="container text-center ">
+        <p>@Model.Text</p>
+        <form id="mailForm" method="post" asp-controller="Mail" asp-action="Send">
+            <div class="form-group">
+                <div class="form-row pb-2">
+                    <input type="text" class="form-control col-6 offset-3" id="contactSubjectField" onblur="blurSubject()" name="subject" placeholder="Subject" />
+                </div>
+                <div class="form-row pb-2">
+                    <textarea class="form-control pb-3" cols="25" rows="15" id="contactBodyField" onblur="blurBody()" name="body" placeholder="Your message"></textarea>
+                </div>
+                <div class="form-row pb-5">
+                    <input type="text" class="form-control col-6 offset-3" id="contactEmailField" onblur="blurEmail()" name="emailaddress" placeholder="Your E-Mail Address" />
+                </div>
+                <div class="form-row pb-2">
+                    <input class="btn btn-primary" type="button" id="sendMailBtn" onclick="verifyInput()" value="Send!" />
+                </div>
+                <div class="form-row">
+                    <div id="g-recaptcha-response" class="g-recaptcha" data-sitekey="6LcHxLkUAAAAAEhwsca24HNSkSbTG6g30IbkI8Lb"></div>
+                </div>
+            </div>
         </form>
     </div>
 </div>

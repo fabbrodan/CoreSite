@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Projects\\Site\\Site\\Site.csproj": {}
+    "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\Site\\Site.csproj": {}
   },
   "projects": {
-    "E:\\Projects\\Site\\Site\\Site.csproj": {
+    "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\Site\\Site.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\Site\\Site\\Site.csproj",
-        "projectName": "Site",
-        "projectPath": "E:\\Projects\\Site\\Site\\Site.csproj",
-        "packagesPath": "C:\\Users\\Daniel Åslund\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\Site\\Site\\obj\\",
+        "projectUniqueName": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\Site\\Site.csproj",
+        "projectName": "EsterSite",
+        "projectPath": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\Site\\Site.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\Site\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Daniel Åslund\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -63,6 +63,10 @@
               "autoReferenced": true
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[2.2.3, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[2.2.0, )"
             }

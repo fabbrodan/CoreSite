@@ -7,6 +7,7 @@ $('.card-img').click(function () {
     $("#myModal").css("display", "block");
     $("#modalImg").attr("src", $(this).attr("src"));
     $("#modalImg").attr("alt", $(this).attr("alt"));
+    $('#modalCaption').html($(this).attr('data-caption'));
 });
 
 $("#modalClose").click(function () {
@@ -14,23 +15,9 @@ $("#modalClose").click(function () {
 });
 
 $(".home-btn").click(function () {
-    window.location.href = "/";
+    window.location.href = "/Home/Start";
 });
 
-$(".delete-folder-btn").click(function () {
-    var doDelete = confirm("This will delete all files in the folder as well!");
-    if (doDelete) {
-
-        $.ajax({
-            url: "/File/DeleteFolder",
-            data: { "id": $(this).attr('data-folderid') },
-            type: "post"
-        });
-        console.log("Deleted");
-    }
-    else {
-        window.location.href = "/Image/LoadAllFiles";
-        console.log($(this).attr('data-folderid'));
-        console.log("Not deleted");
-    }
+$("#reloadContact").click(function () {
+    window.location.href = "/Home/Contact";
 });

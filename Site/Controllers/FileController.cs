@@ -19,34 +19,41 @@ namespace Site.Controllers
             this._context = context;
         }
 
-        public async Task<IActionResult> Delete(int? Id)
+        public async Task<IActionResult> Delete()
         {
-            if (Id == null)
+
+            foreach (var key in Request.Form.Keys)
             {
-                return NotFound();
+                int Id = 0;
+                Int32.TryParse(key, out Id);
+
+                if (Id == 0)
+                {
+                    break;
+                }
+
+                var file = await _context.FindAsync<Files>(Id);
+
+                if (file == null)
+                {
+                    return NotFound();
+                }
+
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files", file.FileName);
+                FileInfo info = new FileInfo(path);
+                try
+                {
+                    _context.Files.Remove(file);
+                    info.Delete();
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+                    return View("../Shared/Error");
+                }
             }
 
-            var file = await _context.FindAsync<Files>(Id);
-
-            if (file == null)
-            {
-                return NotFound();
-            }
-
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files", file.FileName);
-            FileInfo info = new FileInfo(path);
-            try
-            {
-                _context.Files.Remove(file);
-                info.Delete();
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-                return View("../Shared/Error");
-            }
-
-            return RedirectToAction("LoadAllFiles", "Image");
+            return RedirectToAction("Index", "Image");
         }
 
         public async Task<IActionResult> Upload(List<IFormFile> formFiles)
@@ -79,7 +86,7 @@ namespace Site.Controllers
                 }
             }
 
-            return RedirectToAction("LoadAllFiles", "Image");
+            return RedirectToAction("Index", "Image");
         }
 
         [HttpPost]
@@ -103,12 +110,14 @@ namespace Site.Controllers
                 }
             }
 
-            return RedirectToAction("LoadAllFiles", "Image");
+            return RedirectToAction("Index", "Image");
         }
 
         public async Task<IActionResult> DeleteFolder(int? id)
         {
-            Folders folder = await _context.Folders.FirstAsync(f => f.FolderId == id);
+            
+            Folders folder = _context.Folders.First(f => f.FolderId == id);
+
             try
             {
                 _context.Folders.Remove(folder);
@@ -120,7 +129,7 @@ namespace Site.Controllers
                 return View("../Shared/Error");
             }
 
-            return RedirectToAction("LoadAllFIles", "Image");
+            return RedirectToAction("Index", "Image");
         }
     }
 }

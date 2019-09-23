@@ -54,6 +54,7 @@ namespace Site.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
         public async Task<IActionResult> DeleteCategory(int? Id)
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images");
@@ -114,6 +115,19 @@ namespace Site.Controllers
             {
                 return View("../Shared/Error");
             }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditContactPage()
+        {
+            string text = Request.Form["text"];
+
+            ContactText contactText = await _context.ContactText.FirstAsync(i => i.ID == 1);
+            contactText.Text = text;
+            _context.ContactText.Update(contactText);
+            await _context.SaveChangesAsync();
 
             return RedirectToAction("Index");
         }

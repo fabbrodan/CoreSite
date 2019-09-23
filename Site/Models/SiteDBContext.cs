@@ -15,12 +15,20 @@ namespace Site.Models
         {
         }
 
+        public string ConnectionString { get; set; }
+
+        public SiteDBContext(string ConnectionString)
+        {
+            this.ConnectionString = ConnectionString;
+        }
+
         public virtual DbSet<Configuration> Configuration { get; set; }
         public virtual DbSet<Images> Images { get; set; }
         public virtual DbSet<Files> Files { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<FileCategories> FileCategories { get; set; }
         public virtual DbSet<Folders> Folders { get; set; }
+        public virtual DbSet<ContactText> ContactText { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -69,6 +77,8 @@ namespace Site.Models
                 entity.Property(e => e.PublishedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.UploadedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Description).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Folders>(entity =>
@@ -96,6 +106,11 @@ namespace Site.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.UserRootPath).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<ContactText>(entity =>
+            {
+                entity.HasKey(e => e.ID);
             });
         }
     }

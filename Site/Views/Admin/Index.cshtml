@@ -50,7 +50,14 @@
             <a class="btn btn-primary" data-toggle="collapse" href="#contactDiv" role="button" aria-expanded="false" aria-controls="contactDiv">Contact Page</a>
         </p>
         <div class="container collapse" id="contactDiv">
-            <textarea cols="25" rows="15"></textarea>
+            <form id="contactPageForm" asp-controller="Admin" asp-action="EditContactPage" method="post">
+                <div class="form-group">
+                    <textarea cols="25" rows="15" form="contactPageForm" name="text"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Save" />
+                </div>
+            </form>
         </div>
     </div>
 </div>

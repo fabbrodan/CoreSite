@@ -30,8 +30,6 @@ C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreap
 C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Site.csprojAssemblyReference.cache
 C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\Index.g.cshtml.cs
 C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\Unauthorized.g.cshtml.cs
-C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\AllFiles.g.cshtml.cs
-C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\Image.g.cshtml.cs
 C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Index.g.cshtml.cs
 C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Home\Contact.g.cshtml.cs
 C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Mail\Index.g.cshtml.cs
@@ -55,13 +53,10 @@ E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Index.g.cshtml.c
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Home\Contact.g.cshtml.cs
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Home\Login.g.cshtml.cs
-E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\AllFiles.g.cshtml.cs
-E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\Image.g.cshtml.cs
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\Index.g.cshtml.cs
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\Unauthorized.g.cshtml.cs
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Mail\Index.g.cshtml.cs
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
-E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Layout.g.cshtml.cs
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.g.cshtml.cs
@@ -72,3 +67,47 @@ E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Site.Views.pdb
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Site.dll
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Site.pdb
 E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Site.csproj.CopyComplete
+E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\_Index.g.cshtml.cs
+E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
+E:\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Mail\InvalidMessage.g.cshtml.cs
+C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\_Index.g.cshtml.cs
+C:\Users\DAS\Documents\Visual Studio 2017\Projects\Site\Site\obj\Debug\netcoreapp2.2\Razor\Views\Mail\InvalidMessage.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\bin\Debug\netcoreapp2.2\Site.deps.json
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\bin\Debug\netcoreapp2.2\Site.runtimeconfig.json
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\bin\Debug\netcoreapp2.2\Site.runtimeconfig.dev.json
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\bin\Debug\netcoreapp2.2\Site.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\bin\Debug\netcoreapp2.2\Site.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\bin\Debug\netcoreapp2.2\Site.Views.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\bin\Debug\netcoreapp2.2\Site.Views.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.csprojAssemblyReference.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.csproj.CoreCompileInputs.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.RazorAssemblyInfo.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.RazorAssemblyInfo.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.AssemblyInfoInputs.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.AssemblyInfo.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.TagHelpers.input.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.TagHelpers.output.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.RazorCoreGenerate.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Index.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Home\Contact.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Home\Login.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\Index.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\Unauthorized.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Image\_Index.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Mail\Index.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Mail\InvalidMessage.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Layout.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.RazorTargetAssemblyInfo.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.RazorTargetAssemblyInfo.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.Views.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.csproj.CopyComplete
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Home\Start.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Mail\InvalidCaptcha.g.cshtml.cs

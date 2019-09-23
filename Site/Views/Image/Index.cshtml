@@ -1,21 +1,163 @@
-﻿@{
-    ViewData["Title"] = "File Upload";
-}
+﻿@model Site.Models.AllFilesViewModel
 
 <div class="container">
-    <h1>File Upload</h1>
-</div>
 
-<div class="container">
-    <form method="post" asp-controller="Image" asp-action="Upload" enctype="multipart/form-data">
-        <div class="input-group">
-            <div class="custom-file">
-                <input type="file" multiple name="files" class="custom-file-input" id="uploadInput"/>
-                <label class="custom-file-label" for="uploadInput">Choose file(s)</label>
+    <h4>File Repository</h4>
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#imageDiv" role="button" aria-expanded="false" aria-controls="imageDiv">Images</a>
+    </p>
+    
+    <div class="container collapse" id="imageDiv">
+        @foreach (FileCategories category in Model.Categories)
+        {
+            <div class="row">
+                <div class="col">
+                    <p class="pt-3">
+                        <a class="btn btn-secondary" data-toggle="collapse" href="#@category.CategoryLabel.Replace(" ", "")" role="button" aria-expanded="false" aria-controls="@category.CategoryLabel.Replace(" ", "")">
+                            @category.CategoryLabel (@Model.Images.Where(i => i.CategoryId == category.CategoryId).Count())
+                        </a>
+                    </p>
+                </div>
+                <div class="col collapse" id="@category.CategoryLabel.Replace(" ", "")">
+                    <form asp-controller="Image" asp-action="Upload" enctype="multipart/form-data" method="post">
+                        <div class="row">
+                            <div class="col">
+                                <input class="custom-file-input" type="file" multiple name="files"/>
+                                <label class="custom-file-label" for="uploadInput">Choose file(s)</label>
+                            </div>
+                            <div class="col">
+                                <input type="submit" class="btn btn-primary" value="Upload" />
+                                <input type="hidden" name="categoryId" value="@category.CategoryId" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
+
+            <div class="container collapse pb-3" id="@category.CategoryLabel.Replace(" ", "")">
+
+                @if (Model.Images.Where<Images>(i => i.CategoryId == category.CategoryId).Count<Images>() < 1)
+                {
+                    <div class="row">
+                        <p>No images in this category.</p>
+                    </div>
+                }
+
+                @foreach (Images img in Model.Images.Where<Images>(i => i.CategoryId == category.CategoryId).ToList())
+                {
+
+                    <div class="row pt-3">
+                        <div class="col-lg-8 col-md-5 col-sm-3">
+                            <img src="~/Images/@category.CategoryLabel/@img.ImgFileName" alt="@img.ImgFileName" style="max-width:100%; height:auto" />
+                            <p class="pt-1">Uploaded: @img.UploadedDate.ToString("yyyy'-'MM'-'dd")</p>
+                            <a class="pr-2" asp-action="Delete" asp-controller="Image" asp-route-id="@img.ImageId">Delete</a>
+                            @if (img.IsPublished == 1)
+                            {
+                                <a class="pr-2" asp-action="Unpublish" asp-controller="Image" asp-route-id="@img.ImageId">Unpublish</a>
+                            }
+                            else
+                            {
+                                <a class="pr-2" asp-action="Publish" asp-controller="Image" asp-route-id="@img.ImageId">Publish</a>
+                            }
+                            @if (img.StartImage == 1)
+                            {
+                                <a class="pr-2" asp-action="RemoveImageAsStart" asp-controller="Image" asp-route-id="@img.ImageId">Remove from start</a>
+                            }
+                            else
+                            {
+                                <a class="pr-2" asp-action="SetImageAsStart" asp-controller="Image" asp-route-id="@img.ImageId">Set as start image</a>
+                            }
+                            <button class="btn btn-secondary btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @Model.Categories.First(c => c.CategoryId == img.CategoryId).CategoryLabel
+                            </button>
+                            <div class="dropdown-menu">
+                                @foreach (FileCategories _category in Model.Categories)
+                                {
+                                    <a class="dropdown-item btn btn-secondary btn-outline-dark" asp-controller="Image" asp-action="CategoryUpdate" asp-route-ImgId="@img.ImageId" asp-route-CatId="@_category.CategoryId">@_category.CategoryLabel</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <hr/>
+        }
+    </div>
+
+    <p class="pt-3">
+        <a class="btn btn-primary" data-toggle="collapse" href="#fileDiv" role="button" aria-expanded="false" aria-controls="fileDiv">Files</a>
+    </p>
+    <div class="container collapse" id="fileDiv">
+        <div class="row">
+            <form asp-controller="File" asp-action="NewFolder" method="post">
+                <div class="col form-group">
+                    <label for="folderName">New folder</label>
+                    <input type="text" name="folderName" />
+                    <input type="submit" class="btn btn-primary" value="Create" />
+                </div>
+            </form>
         </div>
-        <div class="form-group pt-3">
-            <input type="submit" class="btn btn-primary" value="Upload"/>
+        <hr/>
+        
+        @foreach (Folders folder in Model.FileFolders)
+        {
+        <div>
+            <div class="row container pb-3">
+                <div class="col">
+                    <a class="btn btn-secondary" data-toggle="collapse" href="#@folder.FolderName.Replace(" ", "")" role="button" aria-expanded="false" aria-controls="@folder.FolderName.Replace(" ", "")">
+                        @folder.FolderName (@Model.Files.Where(f => f.FolderId == folder.FolderId).Count())
+                    </a>
+                </div>
+                <div class="col">
+                    <a asp-controller="File" asp-action="DeleteFolder" class="btn btn-danger delete-folder-btn" data-folderid="@folder.FolderId">Delete Folder</a>
+                </div>
+            </div>
+
+            <div class="container collapse" id="@folder.FolderName.Replace(" ", "")">
+
+                <div class="col collapse" id="@folder.FolderName.Replace(" ", "")">
+                    <form asp-controller="File" asp-action="Upload" enctype="multipart/form-data" method="post">
+                        <div class="row">
+                            <div class="col">
+                                <input class="custom-file-input" type="file" multiple name="files" />
+                                <label class="custom-file-label" for="uploadInput">Choose file(s)</label>
+                            </div>
+                            <div class="col">
+                                <input type="submit" class="btn btn-primary" value="Upload" />
+                                <input type="hidden" name="folderId" value="@folder.FolderId" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                @if (Model.Files.Where(f => f.FolderId == folder.FolderId).Count() == 0)
+                {
+                    <p class="pt-2">No files in this folder</p>
+                }
+                else
+                {
+                    <div class="container">
+                        <form asp-controller="File" asp-action="Delete" enctype="multipart/form-data" method="post">
+                            @foreach (Files file in Model.Files.Where(f => f.FolderId == folder.FolderId))
+                            {
+                                <div class="pt-3 form-group">
+                                    <input type="checkbox" id="@file.FileId" name="@file.FileId" style="margin-right:5px;" />
+                                    <label for="@file.FileId"><a class="text-dark" href="~/Files/@folder.FolderName/@file.FileName">@file.FileName</a></label>
+                                </div>
+                            }
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-warning" value="Delete" />
+                            </div>
+                        </form>
+                    </div>
+                }
+            </div>
+            <hr/>
         </div>
-    </form>
+        }
+    </div>
+
+    <div class="pt-3">
+        <a class="btn btn-primary" asp-action="Index" asp-controller="Image">Back to submit</a>
+    </div>
 </div>

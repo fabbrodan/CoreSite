@@ -24,25 +24,44 @@ namespace Site.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
             {
                 return View("Unauthorized");
             }
-            return View();
+
+            AllFilesViewModel model = new AllFilesViewModel
+            {
+                Images = await _context.Images.ToListAsync<Images>(),
+                Files = await _context.Files.ToListAsync<Files>(),
+                Categories = await _context.FileCategories.ToListAsync<FileCategories>(),
+                FileFolders = await _context.Folders.ToListAsync<Folders>()
+            };
+
+            model.Categories = model.Categories.OrderBy<FileCategories, int>(i => i.CategoryId);
+            model.Images = model.Images.OrderByDescending<Images, DateTime>(t => t.UploadedDate);
+            model.Files = model.Files.OrderByDescending<Files, DateTime>(t => t.UploadedDate);
+
+            return View(model);
+            
         }
 
         [HttpPost]
         public IActionResult Upload(List<IFormFile> formFiles)
         {
+            if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
+            {
+                return View("Unauthorized");
+            }
+
             foreach (var file in Request.Form.Files)
             {
                 var path = "";
                 int index = file.FileName.IndexOf('.') + 1;
                 string fileType = file.FileName.Substring(index).ToLower();
 
-                int categoryId = Int32.Parse(Request.Form["folderId"]);
+                int categoryId = Int32.Parse(Request.Form["categoryId"]);
                 FileCategories category = _context.FileCategories.First<FileCategories>(c => c.CategoryId == categoryId);
                 path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", category.CategoryLabel, file.FileName);
 
@@ -69,12 +88,18 @@ namespace Site.Controllers
                 _context.SaveChanges();
             }
 
-            return RedirectToAction("LoadAllFiles");
+            return RedirectToAction("Index");
         }
 
+        /*
         [HttpGet]
         public async Task<IActionResult> LoadAllFiles()
         {
+            if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
+            {
+                return View("Unauthorized");
+            }
+
             AllFilesViewModel model = new AllFilesViewModel
             {
                 Images = await _context.Images.ToListAsync<Images>(),
@@ -88,26 +113,15 @@ namespace Site.Controllers
             model.Files = model.Files.OrderByDescending<Files, DateTime>(t => t.UploadedDate);
 
             return View("AllFiles", model);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var img = await _context.FindAsync<Images>(id);
-            if (img == null)
-            {
-                return NotFound();
-            }
-
-            return View("Image", img);
-        }
+        } */
 
         public async Task<IActionResult> Delete(int? Id)
         {
+            if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
+            {
+                return View("Unauthorized");
+            }
+
             if (Id == null)
             {
                 return NotFound();
@@ -118,7 +132,7 @@ namespace Site.Controllers
                 return NotFound();
             }
             FileCategories category = await _context.FileCategories.FirstAsync(c => c.CategoryId == img.CategoryId);
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", category.CategoryLabel, img.ImgFileName);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", category.CategoryLabel, img.ImgFileName);
             var fileInfo = new FileInfo(path);
             try
             {
@@ -134,11 +148,16 @@ namespace Site.Controllers
                 return View("../Shared/Error");
             }
 
-            return RedirectToAction("LoadAllFiles");
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Publish(int? Id)
         {
+            if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
+            {
+                return View("Unauthorized");
+            }
+
             if (Id == null)
             {
                 return NotFound();
@@ -153,11 +172,62 @@ namespace Site.Controllers
             img.PublishedDate = DateTime.Now;
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("LoadAllFiles");
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> SetImageAsStart(int? Id)
+        {
+            if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
+            {
+                return View("Unauthorized");
+            }
+
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            Images img = await _context.Images.FindAsync(Id);
+            if (img == null)
+            {
+                return NotFound();
+            }
+
+            img.StartImage = 1;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> RemoveImageAsStart(int? Id)
+        {
+            if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
+            {
+                return View("Unauthorized");
+            }
+
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            Images img = await _context.Images.FindAsync(Id);
+            if (img == null)
+            {
+                return NotFound();
+            }
+
+            img.StartImage = 0;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Unpublish(int? Id)
         {
+            if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
+            {
+                return View("Unauthorized");
+            }
+
             if (Id == null)
             {
                 return NotFound();
@@ -171,11 +241,16 @@ namespace Site.Controllers
             img.IsPublished = 0;
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("LoadAllFiles");
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> CategoryUpdate(int? ImgId, int? CatId)
         {
+            if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
+            {
+                return View("Unauthorized");
+            }
+
             if (ImgId == null || CatId == null)
             {
                 return NotFound();
@@ -212,7 +287,20 @@ namespace Site.Controllers
                 return View("../Shared/Error", img);
             }
 
-            return RedirectToAction("LoadAllFiles");
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> UpdateDescription()
+         {
+            int imgId = Int32.Parse(Request.Form["imgId"]);
+            string description = Request.Form["description_"+ imgId.ToString()];
+
+            Images img = await _context.Images.FirstAsync<Images>(i => i.ImageId == imgId);
+            img.Description = description;
+            _context.Images.Update(img);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 

@@ -1,9 +1,19 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]Ester Ganestam</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141409995-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-141409995-1');
+    </script> -->
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -21,28 +31,23 @@
 <body>
     <header>
         <div class="container text-center">
-            <h1>ESTER GANESTAM</h1>
+            <h1><a class="head-title" href="/">ESTER GANESTAM</a></h1>
         </div>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-navbar" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div id="menu-navbar" class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         @if (Context.Session.Keys.Contains<string>("Authenticated"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Start">Home</a>
                             </li>
-                            <!--
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="Index">Upload Files</a>
-                            </li>
-                            -->
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="LoadAllFiles">My Files</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="Index">My Files</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
@@ -54,24 +59,20 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Start">Home</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                             </li>
-                            <!--
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
-                            </li>
-                            -->
                         }
-                    </ul> 
+                    </ul>
                 </div>
+                <p class="alignRight nav-label">Menu</p>
             </div>
         </nav>
     </header>
         <div class="container-fluid">
-            <partial name="_CookieConsentPartial" />
+            <!--<partial name="_CookieConsentPartial" />-->
             <main role="main" class="pb-3">
                 @RenderBody()
             </main>

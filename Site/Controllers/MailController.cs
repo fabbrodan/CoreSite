@@ -11,6 +11,8 @@ using MimeKit.Text;
 using MimeKit;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 namespace Site.Controllers
 {
@@ -18,6 +20,24 @@ namespace Site.Controllers
     {
         private readonly IOptions<MailConfiguration> _mailConfig;
 
+        private readonly string[] badWords = new string[]
+        {
+            "cunt",
+            "bitch",
+            "fucker",
+            "hora",
+            "slyna",
+            "judejävel",
+            "jävel",
+            "horjävel",
+            "kuksugare",
+            "cocksucker",
+            "cock",
+            "sucker",
+            "kuk",
+            "sugare",
+            "fitta"
+        };
         public MailController(IOptions<MailConfiguration> mailConfig)
         {
             _mailConfig = mailConfig;
@@ -28,15 +48,84 @@ namespace Site.Controllers
             return View();
         }
 
-        public IActionResult Send()
+        public IActionResult InvalidMessage()
         {
+            return View();
+        }
+
+        public async Task<bool> VerifyreCaptcha(string reCaptchaResponse)
+        {
+            HttpClient client = new HttpClient();
+            string secretKey = _mailConfig.Value.captchaSecretKey;
+            var content = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("secret", secretKey),
+                new KeyValuePair<string, string>("response", reCaptchaResponse)
+            });
+
+            var response = await client.PostAsync("https://www.google.com/recaptcha/api/siteverify", content);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return false;
+            }
+
+            string JSONResult = response.Content.ReadAsStringAsync().Result;
+            dynamic JSONData = JObject.Parse(JSONResult);
+
+            if (JSONData.success != "true")
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<IActionResult> Send()
+        {
+            string reCaptchaVerification = Request.Form["g-recaptcha-response"];
+
+            if (await VerifyreCaptcha(reCaptchaVerification) != true)
+            {
+                return RedirectToAction("InvalidCaptcha");
+            }
+
+            string bodyText = Request.Form["body"];
+            string subject = Request.Form["subject"];
+            string fromAddress = Request.Form["emailaddress"];
+
+            string[] bodyWords = bodyText.Split(" ");
+            string[] subjectWords = subject.Split(" ");
+
+            foreach (string word in bodyWords)
+            {
+                foreach(string badWord in badWords)
+                {
+                    if(word.ToLower() == badWord)
+                    {
+                        return RedirectToAction("InvalidMessage");
+                    }
+                }
+            }
+
+            foreach (string word in subjectWords)
+            {
+                foreach(string badWord in badWords)
+                {
+                    if (word.ToLower() == badWord)
+                    {
+                        return RedirectToAction("InvalidMessage");
+                    }
+                }
+            }
+
             var message = new MimeMessage();
-            message.To.Add(new MailboxAddress("daniel.aaslund@gmail.com"));
-            message.From.Add(new MailboxAddress("daniel.aaslund@gmail.com"));
-            message.Subject = "New message!";
+            message.To.Add(new MailboxAddress(_mailConfig.Value.Receiver));
+            message.From.Add(new MailboxAddress(_mailConfig.Value.SmtpUser));
+            message.Subject = subject;
             message.Body = new TextPart(TextFormat.Html)
             {
-                Text = Request.Form["body"]
+                Text = bodyText + "<br /><br /> Sent from: " + fromAddress
             };
 
             using (var client = new SmtpClient())
@@ -48,6 +137,11 @@ namespace Site.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult InvalidCaptcha()
+        {
+            return View("InvalidCaptcha");
         }
     }
 }
