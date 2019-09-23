@@ -110,3 +110,4 @@ C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\ne
 C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.pdb
 C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Site.csproj.CopyComplete
 C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Home\Start.g.cshtml.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\obj\Debug\netcoreapp2.2\Razor\Views\Mail\InvalidCaptcha.g.cshtml.cs

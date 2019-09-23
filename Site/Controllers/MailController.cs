@@ -11,12 +11,15 @@ using MimeKit.Text;
 using MimeKit;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 namespace Site.Controllers
 {
     public class MailController : Controller
     {
         private readonly IOptions<MailConfiguration> _mailConfig;
+
         private readonly string[] badWords = new string[]
         {
             "cunt",
@@ -50,10 +53,46 @@ namespace Site.Controllers
             return View();
         }
 
-        public IActionResult Send()
+        public async Task<bool> VerifyreCaptcha(string reCaptchaResponse)
         {
+            HttpClient client = new HttpClient();
+            string secretKey = _mailConfig.Value.captchaSecretKey;
+            var content = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("secret", secretKey),
+                new KeyValuePair<string, string>("response", reCaptchaResponse)
+            });
+
+            var response = await client.PostAsync("https://www.google.com/recaptcha/api/siteverify", content);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return false;
+            }
+
+            string JSONResult = response.Content.ReadAsStringAsync().Result;
+            dynamic JSONData = JObject.Parse(JSONResult);
+
+            if (JSONData.success != "true")
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<IActionResult> Send()
+        {
+            string reCaptchaVerification = Request.Form["g-recaptcha-response"];
+
+            if (await VerifyreCaptcha(reCaptchaVerification) != true)
+            {
+                return RedirectToAction("InvalidCaptcha");
+            }
+
             string bodyText = Request.Form["body"];
             string subject = Request.Form["subject"];
+            string fromAddress = Request.Form["emailaddress"];
 
             string[] bodyWords = bodyText.Split(" ");
             string[] subjectWords = subject.Split(" ");
@@ -86,7 +125,7 @@ namespace Site.Controllers
             message.Subject = subject;
             message.Body = new TextPart(TextFormat.Html)
             {
-                Text = bodyText + Environment.NewLine + Environment.NewLine + "Sent from your site."
+                Text = bodyText + "<br /><br /> Sent from: " + fromAddress
             };
 
             using (var client = new SmtpClient())
@@ -98,6 +137,11 @@ namespace Site.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult InvalidCaptcha()
+        {
+            return View("InvalidCaptcha");
         }
     }
 }

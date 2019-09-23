@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Site.Models;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Linq;
 
 namespace Site.Controllers
 {
@@ -53,9 +55,39 @@ namespace Site.Controllers
 
         public async Task<IActionResult> Index()
         {
+
+            AllFilesViewModel model = new AllFilesViewModel
+            {
+                Images = await _context.Images.Where(s => s.StartImage == 1).ToListAsync<Images>()
+            };
+
+
+            List<int> distinctCategoryIds = new List<int>();
+
+            foreach (Images img in model.Images)
+            {
+                if (!distinctCategoryIds.Contains(img.CategoryId))
+                {
+                    distinctCategoryIds.Add(img.CategoryId);
+                }
+            }
+
+            List<FileCategories> categories = new List<FileCategories>();
+
+            foreach (int id in distinctCategoryIds)
+            {
+                categories.Add(await _context.FileCategories.FirstAsync<FileCategories>(i => i.CategoryId == id));
+            }
+
+            model.Categories = categories;
+
+            return View(model);
+
+            /*
             List<Images> model = await _context.Images.Where(s => s.StartImage == 1).ToListAsync();
 
             return View(model);
+            */
         }
 
         [Route("sitemap.xml")]
@@ -100,7 +132,7 @@ namespace Site.Controllers
 
             model.Categories = SortedCategories;
 
-            return View("Index", model);
+            return View("Start", model);
         }
 
         public IActionResult Download(string fileName)
@@ -130,8 +162,9 @@ namespace Site.Controllers
 
         public async Task<IActionResult> Contact()
         {
-            ContactText contactText = await _context.ContactText.FirstAsync(i => i.ID == 1);
-            return View(contactText);
+            ContactText model = await _context.ContactText.FirstAsync(i => i.ID == 1);
+
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

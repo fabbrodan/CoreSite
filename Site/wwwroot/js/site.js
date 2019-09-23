@@ -17,3 +17,7 @@ $("#modalClose").click(function () {
 $(".home-btn").click(function () {
     window.location.href = "/Home/Start";
 });
+
+$("#reloadContact").click(function () {
+    window.location.href = "/Home/Contact";
+});

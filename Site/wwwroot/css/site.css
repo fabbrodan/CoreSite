@@ -34,6 +34,10 @@ button.accept-policy {
   line-height: inherit;
 }
 
+.warn-alert {
+    background-color:rgba(100, 255,0,0);
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -180,7 +184,7 @@ body {
         display: none;
     }
     #category-navbar-content {
-        display: block;
+        display: none;
     }
 }
 

@@ -198,6 +198,29 @@ namespace Site.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> RemoveImageAsStart(int? Id)
+        {
+            if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))
+            {
+                return View("Unauthorized");
+            }
+
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            Images img = await _context.Images.FindAsync(Id);
+            if (img == null)
+            {
+                return NotFound();
+            }
+
+            img.StartImage = 0;
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
         public async Task<IActionResult> Unpublish(int? Id)
         {
             if (!HttpContext.Session.Keys.Contains<string>("Authenticated"))

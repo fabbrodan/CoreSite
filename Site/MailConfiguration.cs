@@ -12,5 +12,7 @@ namespace Site
         public string SmtpUser { get; set; }
         public string Receiver { get; set; }
         public string SmtpPassword { get; set; }
+        public string captchaSecretKey { get; set; }
+        public string captchaSiteKey { get; set; }
     }
 }
