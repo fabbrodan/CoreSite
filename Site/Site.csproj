@@ -28,4 +28,9 @@
 	<Content Remove="appsettings.Development.json" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\SiteML.Model\SiteML.Model.csproj" />
+  </ItemGroup>
+
 </Project>
