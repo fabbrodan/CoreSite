@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Projects\\Site\\Site\\Site.csproj": {}
+    "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\Site\\Site.csproj": {}
   },
   "projects": {
-    "E:\\Projects\\Site\\SiteML.Model\\SiteML.Model.csproj": {
+    "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.Model\\SiteML.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\Site\\SiteML.Model\\SiteML.Model.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.Model\\SiteML.Model.csproj",
         "projectName": "SiteML.Model",
-        "projectPath": "E:\\Projects\\Site\\SiteML.Model\\SiteML.Model.csproj",
-        "packagesPath": "C:\\Users\\Daniel Åslund\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\Site\\SiteML.Model\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.Model\\SiteML.Model.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Daniel Åslund\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -66,20 +66,20 @@
         }
       }
     },
-    "E:\\Projects\\Site\\Site\\Site.csproj": {
+    "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\Site\\Site.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\Site\\Site\\Site.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\Site\\Site.csproj",
         "projectName": "EsterSite",
-        "projectPath": "E:\\Projects\\Site\\Site\\Site.csproj",
-        "packagesPath": "C:\\Users\\Daniel Åslund\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\Site\\Site\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\Site\\Site.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\Site\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Daniel Åslund\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -92,8 +92,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "E:\\Projects\\Site\\SiteML.Model\\SiteML.Model.csproj": {
-                "projectPath": "E:\\Projects\\Site\\SiteML.Model\\SiteML.Model.csproj"
+              "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.Model\\SiteML.Model.csproj": {
+                "projectPath": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.Model\\SiteML.Model.csproj"
               }
             }
           }

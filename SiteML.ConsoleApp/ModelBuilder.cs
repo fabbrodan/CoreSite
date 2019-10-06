@@ -12,7 +12,7 @@ namespace SiteML.ConsoleApp
 {
     public static class ModelBuilder
     {
-        private static string TRAIN_DATA_FILEPATH = @"E:\Projects\Site\Site\MLTraining\SMSSpamCollection.tsv";
+        private static string TRAIN_DATA_FILEPATH = @"C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\MLTraining\SMSSpamCollection.tsv";
         private static string MODEL_FILEPATH = @"../../../../SiteML.Model/MLModel.zip";
 
         // Create MLContext to be shared across the model creation workflow objects 

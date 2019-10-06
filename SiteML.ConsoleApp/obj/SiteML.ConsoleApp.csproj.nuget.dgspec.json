@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Projects\\Site\\SiteML.ConsoleApp\\SiteML.ConsoleApp.csproj": {}
+    "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.ConsoleApp\\SiteML.ConsoleApp.csproj": {}
   },
   "projects": {
-    "E:\\Projects\\Site\\SiteML.ConsoleApp\\SiteML.ConsoleApp.csproj": {
+    "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.ConsoleApp\\SiteML.ConsoleApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\Site\\SiteML.ConsoleApp\\SiteML.ConsoleApp.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.ConsoleApp\\SiteML.ConsoleApp.csproj",
         "projectName": "SiteML.ConsoleApp",
-        "projectPath": "E:\\Projects\\Site\\SiteML.ConsoleApp\\SiteML.ConsoleApp.csproj",
-        "packagesPath": "C:\\Users\\Daniel Åslund\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\Site\\SiteML.ConsoleApp\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.ConsoleApp\\SiteML.ConsoleApp.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.ConsoleApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Daniel Åslund\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -30,8 +30,8 @@
         "frameworks": {
           "netcoreapp2.1": {
             "projectReferences": {
-              "E:\\Projects\\Site\\SiteML.Model\\SiteML.Model.csproj": {
-                "projectPath": "E:\\Projects\\Site\\SiteML.Model\\SiteML.Model.csproj"
+              "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.Model\\SiteML.Model.csproj": {
+                "projectPath": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.Model\\SiteML.Model.csproj"
               }
             }
           }
@@ -70,20 +70,20 @@
         }
       }
     },
-    "E:\\Projects\\Site\\SiteML.Model\\SiteML.Model.csproj": {
+    "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.Model\\SiteML.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\Site\\SiteML.Model\\SiteML.Model.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.Model\\SiteML.Model.csproj",
         "projectName": "SiteML.Model",
-        "projectPath": "E:\\Projects\\Site\\SiteML.Model\\SiteML.Model.csproj",
-        "packagesPath": "C:\\Users\\Daniel Åslund\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\Site\\SiteML.Model\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.Model\\SiteML.Model.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Documents\\Visual Studio 2019\\Projects\\EsterSite\\SiteML.Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Daniel Åslund\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

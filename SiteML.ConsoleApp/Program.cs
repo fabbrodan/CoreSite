@@ -11,7 +11,7 @@ namespace SiteML.ConsoleApp
     class Program
     {
         //Dataset to use for predictions 
-        private const string DATA_FILEPATH = @"E:\Projects\Site\Site\MLTraining\SMSSpamCollection.tsv";
+        private const string DATA_FILEPATH = @"C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\Site\MLTraining\SMSSpamCollection.tsv";
 
         static void Main(string[] args)
         {
