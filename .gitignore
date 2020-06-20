@@ -4,11 +4,12 @@
 
 /.vs/Site/v15
 /.vs/Site/v16
-/Site/bin/Release/netcoreapp2.2
-/Site/obj/Linux/netcoreapp2.2
+/Site/bin/Release/netcoreapp3.1
+/Site/bin/Debug/netcoreapp3.1
+/Site/obj/Linux/netcoreapp3.1
 /Site/obj/publish/linux-x64
-/Site/obj/Release/netcoreapp2.2
-/Site/obj/netcoreapp2.2/linux-x64/host
+/Site/obj/Release/netcoreapp3.1
+/Site/obj/netcoreapp3.1/linux-x64/host
 /Site/wwwroot/Images
 /Site/wwwroot/Files
 /Site/appsettings.json
