@@ -13,6 +13,8 @@ using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
+using SiteML.Model;
+
 
 namespace Site.Controllers
 {
@@ -81,18 +83,30 @@ namespace Site.Controllers
             return true;
         }
 
-        public async Task<IActionResult> Send()
+        public IActionResult Send()
         {
+            /*
             string reCaptchaVerification = Request.Form["g-recaptcha-response"];
 
             if (await VerifyreCaptcha(reCaptchaVerification) != true)
             {
                 return RedirectToAction("InvalidCaptcha");
             }
+            */
 
             string bodyText = Request.Form["body"];
             string subject = Request.Form["subject"];
             string fromAddress = Request.Form["emailaddress"];
+
+            var input = new ModelInput();
+            input.SentimentText = bodyText;
+
+            ModelOutput result = ConsumeModel.Predict(input);
+
+            if (result.Prediction)
+            {
+                return RedirectToAction("SpamResponse");
+            }
 
             string[] bodyWords = bodyText.Split(" ");
             string[] subjectWords = subject.Split(" ");
@@ -142,6 +156,11 @@ namespace Site.Controllers
         public IActionResult InvalidCaptcha()
         {
             return View("InvalidCaptcha");
+        }
+
+        public IActionResult SpamResponse()
+        {
+            return View("SpamWarning");
         }
     }
 }

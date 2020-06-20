@@ -8,9 +8,8 @@
         var subject = $("#contactSubjectField");
         var body = $("#contactBodyField");
         var email = $("#contactEmailField");
-        var recaptcha = $("#g-recaptcha-response");
 
-        if (subject.val() === "" || body.val() === "" || email.val() === "" || recaptcha.val() === "") {
+        if (subject.val() === "" || body.val() === "" || email.val() === "") {
 
             if (subject.val() === "") {
                 subject.addClass("alert-danger");
@@ -33,9 +32,6 @@
                 if (email.hasClass("alert-danger")) {
                     email.removeClass("alert-danger");
                 }
-            }
-            if (recaptcha.val() === "") {
-                alert("Please verify that you are not a robot!");
             }
         } else if (subject.val() != "" && body.val() != "" && email.val() != "") {
             console.log("everything was ok");
@@ -101,9 +97,6 @@
                 </div>
                 <div class="form-row pb-2">
                     <input class="btn btn-primary" type="button" id="sendMailBtn" onclick="verifyInput()" value="Send!" />
-                </div>
-                <div class="form-row">
-                    <div id="g-recaptcha-response" class="g-recaptcha" data-sitekey="6LcHxLkUAAAAAEhwsca24HNSkSbTG6g30IbkI8Lb"></div>
                 </div>
             </div>
         </form>

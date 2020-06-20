@@ -1,0 +1,18 @@
+E:\Projects\Site\SiteML.Model\bin\Debug\netstandard2.0\MLModel.zip
+E:\Projects\Site\SiteML.Model\bin\Debug\netstandard2.0\SiteML.Model.deps.json
+E:\Projects\Site\SiteML.Model\bin\Debug\netstandard2.0\SiteML.Model.dll
+E:\Projects\Site\SiteML.Model\bin\Debug\netstandard2.0\SiteML.Model.pdb
+E:\Projects\Site\SiteML.Model\obj\Debug\netstandard2.0\SiteML.Model.csprojAssemblyReference.cache
+E:\Projects\Site\SiteML.Model\obj\Debug\netstandard2.0\SiteML.Model.AssemblyInfoInputs.cache
+E:\Projects\Site\SiteML.Model\obj\Debug\netstandard2.0\SiteML.Model.AssemblyInfo.cs
+E:\Projects\Site\SiteML.Model\obj\Debug\netstandard2.0\SiteML.Model.dll
+E:\Projects\Site\SiteML.Model\obj\Debug\netstandard2.0\SiteML.Model.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\SiteML.Model\bin\Debug\netstandard2.0\MLModel.zip
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\SiteML.Model\bin\Debug\netstandard2.0\SiteML.Model.deps.json
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\SiteML.Model\bin\Debug\netstandard2.0\SiteML.Model.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\SiteML.Model\bin\Debug\netstandard2.0\SiteML.Model.pdb
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\SiteML.Model\obj\Debug\netstandard2.0\SiteML.Model.csprojAssemblyReference.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\SiteML.Model\obj\Debug\netstandard2.0\SiteML.Model.AssemblyInfoInputs.cache
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\SiteML.Model\obj\Debug\netstandard2.0\SiteML.Model.AssemblyInfo.cs
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\SiteML.Model\obj\Debug\netstandard2.0\SiteML.Model.dll
+C:\Users\admin\Documents\Visual Studio 2019\Projects\EsterSite\SiteML.Model\obj\Debug\netstandard2.0\SiteML.Model.pdb
