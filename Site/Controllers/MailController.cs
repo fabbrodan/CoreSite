@@ -120,8 +120,8 @@ namespace Site.Controllers
             }
 
             var message = new MimeMessage();
-            message.To.Add(new MailboxAddress(_mailConfig.Value.Receiver));
-            message.From.Add(new MailboxAddress(_mailConfig.Value.SmtpUser));
+            message.To.Add(new MailboxAddress("Inbox", _mailConfig.Value.Receiver));
+            message.From.Add(new MailboxAddress("Inbox", _mailConfig.Value.SmtpUser));
             message.Subject = subject;
             message.Body = new TextPart(TextFormat.Html)
             {

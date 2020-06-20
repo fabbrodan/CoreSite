@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Site.Models;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.Hosting;
 
 namespace Site
 {
@@ -47,14 +48,14 @@ namespace Site
                 options.Cookie.HttpOnly = false;
             });
 
-            services.AddDbContext<SiteDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDbContext<SiteDBContext>(options => options.UseMySQL(Configuration.GetConnectionString("Database")));
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.ApplicationName == Environments.Development)
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -72,11 +73,13 @@ namespace Site
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();
-            app.UseMvc(routes =>
+            app.UseRouting();
+            app.UseEndpoints(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapDefaultControllerRoute();
+                routes.MapControllerRoute(
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
